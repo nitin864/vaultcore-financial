@@ -32,15 +32,15 @@ public class UserServiceImp implements UserService {
     @Override
     public void addRoleToUser(String username, String roleName) {
         log.info("Adding role {} to user {}", roleName, username);
-        User user = userRepo.findbyUsername(username);
-        Role role = roleRepo.findbyName(roleName);
+        User user = userRepo.findByUsername(username);
+        Role role = roleRepo.findByName(roleName);
         user.getRoles().add(role);
     }
 
     @Override
     public User getUser(String username) {
         log.info("Fetching users {}",username);
-        return userRepo.findbyUsername((username));
+        return userRepo.findByUsername((username));
     }
 
     @Override
