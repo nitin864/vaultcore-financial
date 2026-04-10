@@ -39,11 +39,13 @@ public class UserServiceImp implements UserService {
 
     @Override
     public User getUser(String username) {
+        log.info("Fetching users {}",username);
         return userRepo.findbyUsername((username));
     }
 
     @Override
     public List<User> getUser() {
+        log.info("Fetching all users");
         return userRepo.findAll();
     }
 }
