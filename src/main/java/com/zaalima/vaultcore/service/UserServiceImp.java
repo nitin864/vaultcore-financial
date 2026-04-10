@@ -19,16 +19,19 @@ public class UserServiceImp implements UserService {
     private final RoleRepo roleRepo;
     @Override
     public User saveUser(User user) {
+        log.info("Saving new user {} to DB", user.getName());
         return userRepo.save(user);
     }
 
     @Override
     public Role saveRole(Role role) {
+        log.info("Saving new role {} to DB", role.getName());
         return roleRepo.save(role);
     }
 
     @Override
     public void addRoleToUser(String username, String roleName) {
+        log.info("Adding role {} to user {}", roleName, username);
         User user = userRepo.findbyUsername(username);
         Role role = roleRepo.findbyName(roleName);
         user.getRoles().add(role);
