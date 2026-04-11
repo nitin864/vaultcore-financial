@@ -29,6 +29,7 @@ public class VaultcoreApplication {
 		return args -> {
 
 			//save roles
+
 			userService.saveRole(new Role(null, "ROLE_USER"));
 			userService.saveRole(new Role(null, "ROLE_MANAGER"));
 			userService.saveRole(new Role(null, "ROLE_ADMIN"));
