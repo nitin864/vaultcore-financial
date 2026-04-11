@@ -1,6 +1,6 @@
 package com.zaalima.vaultcore.security;
 
-import jakarta.servlet.Filter;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,7 +44,9 @@ public class SecurityConfig {
                         .requestMatchers("/api/login", "/api/register").permitAll()
                         .anyRequest().authenticated()
                 );
-                http.addFilter(null);
+                http.addFilterBefore(new JwtFilter(), UsernamePasswordAuthenticationFilter.class);
+
+
         return http.build();
     }
 }

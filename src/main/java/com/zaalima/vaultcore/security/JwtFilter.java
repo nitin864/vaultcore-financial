@@ -17,7 +17,7 @@ import java.io.IOException;
 public class JwtFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
 
-    public JwtFilter(AuthenticationManager authenticationManager){
+    public JwtFilter(){
         this.authenticationManager = authenticationManager;
     }
     @Override
