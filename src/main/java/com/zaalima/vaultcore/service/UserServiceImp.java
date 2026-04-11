@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service @RequiredArgsConstructor @Transactional @Slf4j
 
-public class UserServiceImp implements UserService {
+public class UserServiceImp implements UserService{
     private final UserRepo userRepo;
     private final RoleRepo roleRepo;
     @Override
