@@ -8,27 +8,65 @@ import com.zaalima.vaultcore.repo.UserRepo;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-@Service @RequiredArgsConstructor @Transactional @Slf4j
+@Service
+@RequiredArgsConstructor
+@Transactional
+@Slf4j
+public class UserServiceImp implements UserService, UserDetailsService {
 
-public class UserServiceImp implements UserService{
     private final UserRepo userRepo;
     private final RoleRepo roleRepo;
+
+    //AUTHENTICATION METHOD
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        User user = userRepo.findByUsername(username);
+
+        if (user == null) {
+            log.error("User not found in the database");
+            throw new UsernameNotFoundException("User not found in the database");
+        } else {
+            log.info("User found in the database: {}", username);
+        }
+
+        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+
+        user.getRoles().forEach(role -> {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        });
+
+        return new org.springframework.security.core.userdetails.User(
+                user.getUsername(),
+                user.getPassword(),
+                authorities
+        );
+    }
+
+    //SAVE USER
     @Override
     public User saveUser(User user) {
         log.info("Saving new user {} to DB", user.getName());
         return userRepo.save(user);
     }
 
+    //SAVE ROLE
     @Override
     public Role saveRole(Role role) {
         log.info("Saving new role {} to DB", role.getName());
         return roleRepo.save(role);
     }
 
+    //ADD ROLE TO USER
     @Override
     public void addRoleToUser(String username, String roleName) {
         log.info("Adding role {} to user {}", roleName, username);
@@ -37,12 +75,14 @@ public class UserServiceImp implements UserService{
         user.getRoles().add(role);
     }
 
+    //GET SINGLE USER
     @Override
     public User getUser(String username) {
-        log.info("Fetching users {}",username);
-        return userRepo.findByUsername((username));
+        log.info("Fetching user {}", username);
+        return userRepo.findByUsername(username);
     }
 
+    //GET ALL USERS
     @Override
     public List<User> getUser() {
         log.info("Fetching all users");
