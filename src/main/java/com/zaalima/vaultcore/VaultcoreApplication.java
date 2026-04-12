@@ -19,12 +19,9 @@ public class VaultcoreApplication {
 		SpringApplication.run(VaultcoreApplication.class, args);
 	}
 
+
+
     @Bean
-	PasswordEncoder passwordEncoder(){
-		return new BCryptPasswordEncoder();
-	}
-
-
 	CommandLineRunner run(UserService userService){
 		return args -> {
 

@@ -14,24 +14,18 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final UserDetailsService userDetailsService;
-
-    // Password Encoder
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    //Authentication Manager (replacement of configure(auth))
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
 
-    //HTTP Security (replacement of configure(http))
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
 
@@ -45,8 +39,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 );
 
-        // ✅ FIX HERE
-        http.addFilterBefore(new JwtFilter(authenticationManager), UsernamePasswordAuthenticationFilter.class);
+        http.addFilter(new JwtFilter(authenticationManager));
 
         return http.build();
     }
