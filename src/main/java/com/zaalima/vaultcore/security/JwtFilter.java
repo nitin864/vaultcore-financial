@@ -7,6 +7,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.support.SimpleTriggerContext;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -47,6 +48,12 @@ public class JwtFilter extends UsernamePasswordAuthenticationFilter {
                 .withClaim("roles", user.getAuthorities().stream()
                         .map(GrantedAuthority::getAuthority)
                         .collect(Collectors.toList()))
+                .sign(algorithm);
+
+        String refresh_token = JWT.create()
+                .withSubject(user.getUsername())
+                .withExpiresAt(new Date(System.currentTimeMillis() + 30*60*1000))
+                .withIssuer(request.getRequestURL().toString())
                 .sign(algorithm);
      }
 }
