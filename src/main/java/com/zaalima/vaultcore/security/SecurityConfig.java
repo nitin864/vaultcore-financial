@@ -13,6 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
+
 @Configuration
 public class SecurityConfig {
 
@@ -35,10 +38,12 @@ public class SecurityConfig {
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
 
+
                 .authorizeHttpRequests(auth -> auth
+
                         .requestMatchers("/api/login", "/api/register").permitAll()
-                        .requestMatchers("/api/user/**").hasAuthority("ROLE_USER")
-                        .requestMatchers("/api/admin/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers(GET, "/api/user/**").hasAuthority("ROLE_USER")
+                        .requestMatchers(POST, "/api/user/save/**").hasAuthority("ROLE_ADMIN")
                         .anyRequest().authenticated()
 
                 );

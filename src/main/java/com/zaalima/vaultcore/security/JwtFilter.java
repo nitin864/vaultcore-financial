@@ -33,13 +33,27 @@ public class JwtFilter extends UsernamePasswordAuthenticationFilter {
         this.authenticationManager = authenticationManager;
     }
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        log.info("username is {}", username);
-        log.info("password is {}", password);
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
-        return  authenticationManager.authenticate(authenticationToken);
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+            throws AuthenticationException {
+
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            Map<String, String> creds = objectMapper.readValue(request.getInputStream(), Map.class);
+
+            String username = creds.get("username");
+            String password = creds.get("password");
+
+            log.info("username is {}", username);
+            log.info("password is {}", password);
+
+            UsernamePasswordAuthenticationToken authenticationToken =
+                    new UsernamePasswordAuthenticationToken(username, password);
+
+            return authenticationManager.authenticate(authenticationToken);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
