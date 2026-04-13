@@ -1,5 +1,8 @@
 package com.zaalima.vaultcore.security;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,10 +19,19 @@ public class CustomAuthorizationFIlter extends OncePerRequestFilter {
        if(request.getServletPath().equals("/api/login")){
            filterChain.doFilter(request,response);
        }else {
-           String authorizationheaders = request.getHeader(AUTHORIZATION);
-           if (authorizationheaders != null && authorizationheaders.startsWith("Bearer "));
-           String token = authorizationheaders.substring("Bearer ".length());
-           Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+           try {
+               String authorizationheaders = request.getHeader(AUTHORIZATION);
+               if (authorizationheaders != null && authorizationheaders.startsWith("Bearer "));
+               String token = authorizationheaders.substring("Bearer ".length());
+               Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+               JWTVerifier verifier = JWT.require(algorithm).build();
+               DecodedJWT decodedJWT = verifier.verify(token);
+               String username = decodedJWT.getSubject();
+               String[] roles = decodedJWT.getClaim("roles").asArray(String.class );
+           }catch (Exception exception){
+
+           }
+
        }
     }
 }
