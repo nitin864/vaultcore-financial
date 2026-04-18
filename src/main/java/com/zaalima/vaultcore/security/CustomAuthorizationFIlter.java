@@ -25,9 +25,10 @@ public class CustomAuthorizationFIlter extends OncePerRequestFilter {
        if(request.getServletPath().equals("/api/login")){
            filterChain.doFilter(request,response);
        }else {
+           String authorizationheaders = request.getHeader(AUTHORIZATION);
+           if (authorizationheaders != null && authorizationheaders.startsWith("Bearer ")){
            try {
-               String authorizationheaders = request.getHeader(AUTHORIZATION);
-               if (authorizationheaders != null && authorizationheaders.startsWith("Bearer "));
+
                String token = authorizationheaders.substring("Bearer ".length());
                Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
                JWTVerifier verifier = JWT.require(algorithm).build();
@@ -46,6 +47,10 @@ public class CustomAuthorizationFIlter extends OncePerRequestFilter {
 
            }
 
-       }
+       }else {
+            filterChain.doFilter(request, response);
+
+        }
     }
+}
 }
