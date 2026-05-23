@@ -1,0 +1,49 @@
+.stmt-page { display: flex; flex-direction: column; gap: 20px; }
+.stmt-layout { display: grid; grid-template-columns: 220px 1fr; gap: 20px; align-items: start; }
+
+/* ── Month selector ──────────────────────────────────── */
+.stmt-months { background: var(--vc-bg-card); border: 1px solid var(--vc-border); border-radius: var(--vc-radius-md); padding: 16px; display: flex; flex-direction: column; gap: 6px; }
+.stmt-months__title { font-size: 0.75rem; font-weight: 600; color: var(--vc-text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+.stmt-month-btn {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; padding: 10px 14px; background: none;
+  border: 1px solid transparent; border-radius: var(--vc-radius-sm);
+  color: var(--vc-text-secondary); font-family: inherit; font-size: 0.875rem; cursor: pointer;
+  transition: all var(--vc-transition);
+}
+.stmt-month-btn:hover { background: var(--vc-bg-input); color: var(--vc-text-primary); }
+.stmt-month-btn--active { background: rgba(99,102,241,0.1); border-color: var(--vc-accent); color: var(--vc-accent-light); font-weight: 600; }
+
+/* ── Statement detail ────────────────────────────────── */
+.stmt-detail { display: flex; flex-direction: column; gap: 16px; }
+.stmt-header-card { display: flex; justify-content: space-between; align-items: center; }
+.stmt-brand { display: flex; align-items: center; gap: 12px; }
+.stmt-brand__logo { width: 38px; height: 38px; background: linear-gradient(135deg,#6366f1,#4f46e5); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+.stmt-brand__name { font-weight: 700; font-size: 0.95rem; color: var(--vc-text-primary); }
+.stmt-brand__sub  { font-size: 0.75rem; color: var(--vc-text-muted); }
+.stmt-period__label { font-size: 0.72rem; color: var(--vc-text-muted); text-transform: uppercase; text-align: right; }
+.stmt-period__val   { font-size: 1rem; font-weight: 700; color: var(--vc-accent-light); text-align: right; }
+
+/* ── Stat grid ───────────────────────────────────────── */
+.stmt-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.stmt-stat {
+  background: var(--vc-bg-card); border: 1px solid var(--vc-border);
+  border-radius: var(--vc-radius-md); padding: 16px 20px;
+}
+.stmt-stat--green  { border-left: 3px solid var(--vc-success); }
+.stmt-stat--red    { border-left: 3px solid var(--vc-danger); }
+.stmt-stat--accent { border-left: 3px solid var(--vc-accent); }
+.stmt-stat__label  { font-size: 0.72rem; color: var(--vc-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.stmt-stat__val    { font-size: 1.25rem; font-weight: 700; color: var(--vc-text-primary); margin-top: 4px; }
+
+/* ── Transactions ────────────────────────────────────── */
+.stmt-txn-card { }
+.stmt-txn-title { font-size: 0.95rem; font-weight: 600; color: var(--vc-text-primary); margin-bottom: 16px; }
+.stmt-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+.stmt-table th { padding: 10px 14px; text-align: left; font-size: 0.72rem; font-weight: 600; color: var(--vc-text-muted); text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--vc-border); }
+.stmt-table td { padding: 12px 14px; border-bottom: 1px solid rgba(148,163,184,0.06); vertical-align: middle; color: var(--vc-text-secondary); }
+.stmt-table tbody tr:hover td { background: var(--vc-bg-input); }
+.stmt-credit { color: var(--vc-success) !important; font-weight: 600; }
+.stmt-debit  { color: var(--vc-danger)  !important; font-weight: 600; }
+
+@media (max-width: 768px) { .stmt-layout { grid-template-columns: 1fr; } .stmt-grid { grid-template-columns: 1fr 1fr; } }

@@ -1,0 +1,239 @@
+/* ═══════════════════════════════════════════════════════
+   VaultCore Financial — Design System
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  /* Core Palette */
+  --vc-bg-primary: #0a0e1a;
+  --vc-bg-secondary: #111827;
+  --vc-bg-card: #1a2236;
+  --vc-bg-card-hover: #1f2a42;
+  --vc-bg-input: #0f1629;
+  --vc-bg-sidebar: #0d1220;
+  --vc-bg-glass: rgba(26, 34, 54, 0.7);
+
+  /* Accent */
+  --vc-accent: #6366f1;
+  --vc-accent-light: #818cf8;
+  --vc-accent-dark: #4f46e5;
+  --vc-accent-glow: rgba(99, 102, 241, 0.25);
+
+  /* Semantic */
+  --vc-success: #22c55e;
+  --vc-success-bg: rgba(34, 197, 94, 0.1);
+  --vc-danger: #ef4444;
+  --vc-danger-bg: rgba(239, 68, 68, 0.1);
+  --vc-warning: #f59e0b;
+  --vc-warning-bg: rgba(245, 158, 11, 0.1);
+  --vc-info: #06b6d4;
+  --vc-info-bg: rgba(6, 182, 212, 0.1);
+
+  /* Text */
+  --vc-text-primary: #f1f5f9;
+  --vc-text-secondary: #94a3b8;
+  --vc-text-muted: #64748b;
+  --vc-text-inverse: #0a0e1a;
+
+  /* Borders */
+  --vc-border: rgba(148, 163, 184, 0.1);
+  --vc-border-focus: rgba(99, 102, 241, 0.5);
+
+  /* Shadows */
+  --vc-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --vc-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --vc-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --vc-shadow-glow: 0 0 24px var(--vc-accent-glow);
+
+  /* Radius */
+  --vc-radius-sm: 8px;
+  --vc-radius-md: 12px;
+  --vc-radius-lg: 16px;
+  --vc-radius-xl: 24px;
+  --vc-radius-full: 9999px;
+
+  /* Transitions */
+  --vc-transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --vc-transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Spacing */
+  --vc-sidebar-width: 260px;
+  --vc-header-height: 64px;
+}
+
+/* ── Reset ───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--vc-bg-primary);
+  color: var(--vc-text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a { color: var(--vc-accent-light); text-decoration: none; transition: color var(--vc-transition); }
+a:hover { color: var(--vc-accent); }
+
+/* ── Scrollbar ───────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--vc-bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--vc-text-muted); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--vc-text-secondary); }
+
+/* ── Utility ─────────────────────────────────────────── */
+.vc-card {
+  background: var(--vc-bg-card);
+  border: 1px solid var(--vc-border);
+  border-radius: var(--vc-radius-md);
+  padding: 24px;
+  transition: all var(--vc-transition);
+}
+.vc-card:hover {
+  background: var(--vc-bg-card-hover);
+  border-color: var(--vc-border-focus);
+  box-shadow: var(--vc-shadow-glow);
+}
+
+.vc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border: none;
+  border-radius: var(--vc-radius-sm);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--vc-transition);
+  text-decoration: none;
+}
+
+.vc-btn-primary {
+  background: linear-gradient(135deg, var(--vc-accent), var(--vc-accent-dark));
+  color: #fff;
+  box-shadow: var(--vc-shadow-sm);
+}
+.vc-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--vc-shadow-glow);
+}
+.vc-btn-primary:active { transform: translateY(0); }
+
+.vc-btn-secondary {
+  background: var(--vc-bg-card);
+  color: var(--vc-text-primary);
+  border: 1px solid var(--vc-border);
+}
+.vc-btn-secondary:hover {
+  border-color: var(--vc-accent);
+  background: var(--vc-bg-card-hover);
+}
+
+.vc-btn-danger {
+  background: linear-gradient(135deg, var(--vc-danger), #dc2626);
+  color: #fff;
+}
+
+.vc-btn-ghost {
+  background: transparent;
+  color: var(--vc-text-secondary);
+}
+.vc-btn-ghost:hover { color: var(--vc-text-primary); background: var(--vc-bg-card); }
+
+.vc-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.vc-input {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--vc-bg-input);
+  border: 1px solid var(--vc-border);
+  border-radius: var(--vc-radius-sm);
+  color: var(--vc-text-primary);
+  font-family: inherit;
+  font-size: 0.9rem;
+  transition: all var(--vc-transition);
+  outline: none;
+}
+.vc-input:focus {
+  border-color: var(--vc-accent);
+  box-shadow: 0 0 0 3px var(--vc-accent-glow);
+}
+.vc-input::placeholder { color: var(--vc-text-muted); }
+
+.vc-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--vc-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.vc-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: var(--vc-radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.vc-badge-success { background: var(--vc-success-bg); color: var(--vc-success); }
+.vc-badge-danger { background: var(--vc-danger-bg); color: var(--vc-danger); }
+.vc-badge-warning { background: var(--vc-warning-bg); color: var(--vc-warning); }
+.vc-badge-info { background: var(--vc-info-bg); color: var(--vc-info); }
+
+/* ── Animations ──────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fade { animation: fadeIn 0.4s ease-out; }
+.animate-slide { animation: slideInLeft 0.3s ease-out; }
+
+.vc-skeleton {
+  background: linear-gradient(90deg, var(--vc-bg-card) 25%, var(--vc-bg-card-hover) 50%, var(--vc-bg-card) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--vc-radius-sm);
+}
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  :root {
+    --vc-sidebar-width: 0px;
+  }
+}

@@ -1,0 +1,63 @@
+.fraud-page { display: flex; flex-direction: column; gap: 20px; }
+
+.fraud-score-badge {
+  display: flex; flex-direction: column; align-items: flex-end;
+  gap: 2px; padding: 10px 16px;
+  background: var(--vc-bg-card); border: 1px solid var(--vc-border);
+  border-radius: var(--vc-radius-sm);
+}
+.fraud-score-badge span { font-size: 0.72rem; color: var(--vc-text-muted); text-transform: uppercase; }
+.fraud-score-badge strong { font-size: 1rem; font-weight: 800; }
+
+.fraud-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+.fraud-stat {
+  background: var(--vc-bg-card); border: 1px solid var(--vc-border);
+  border-radius: var(--vc-radius-md); padding: 16px 20px;
+}
+.fraud-stat--red   { border-left: 3px solid var(--vc-danger); }
+.fraud-stat--warn  { border-left: 3px solid var(--vc-warning); }
+.fraud-stat--green { border-left: 3px solid var(--vc-success); }
+.fraud-stat__label { font-size: 0.72rem; color: var(--vc-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.fraud-stat__val   { font-size: 1.6rem; font-weight: 800; color: var(--vc-text-primary); margin-top: 4px; }
+
+/* ── Alert cards ─────────────────────────────────────── */
+.fraud-alerts { display: flex; flex-direction: column; gap: 14px; }
+.fraud-alert {
+  display: flex; gap: 16px; align-items: flex-start;
+  background: var(--vc-bg-card); border: 1px solid var(--vc-border);
+  border-radius: var(--vc-radius-md); padding: 18px 20px;
+  animation: fadeIn 0.3s ease;
+  transition: all var(--vc-transition);
+}
+.fraud-alert--critical { border-left: 4px solid var(--vc-danger);  background: rgba(239,68,68,0.04); }
+.fraud-alert--high     { border-left: 4px solid var(--vc-warning); background: rgba(245,158,11,0.04); }
+.fraud-alert--medium   { border-left: 4px solid var(--vc-info);    background: rgba(6,182,212,0.04); }
+
+.fraud-alert__icon { font-size: 1.6rem; flex-shrink: 0; margin-top: 2px; }
+.fraud-alert__body { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.fraud-alert__header { display: flex; align-items: center; gap: 10px; }
+.fraud-alert__id { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--vc-text-muted); }
+.fraud-alert__desc { font-weight: 600; color: var(--vc-text-primary); font-size: 0.9rem; }
+.fraud-alert__reason { font-size: 0.82rem; color: var(--vc-text-secondary); }
+.fraud-alert__meta { display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.8rem; color: var(--vc-text-muted); }
+.fraud-alert__meta strong { color: var(--vc-text-secondary); }
+.fraud-alert__actions { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
+
+.fraud-empty {
+  background: var(--vc-bg-card); border: 1px dashed var(--vc-border);
+  border-radius: var(--vc-radius-md); padding: 60px;
+  text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.fraud-empty h3 { color: var(--vc-success); font-size: 1.2rem; }
+.fraud-empty p  { color: var(--vc-text-muted); font-size: 0.875rem; }
+
+/* ── 2FA panel ───────────────────────────────────────── */
+.fraud-2fa__title { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+.fraud-2fa__sub   { font-size: 0.82rem; color: var(--vc-text-muted); margin-bottom: 16px; }
+.fraud-2fa__items { display: flex; flex-direction: column; gap: 10px; }
+.fraud-2fa__item  {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 16px; background: var(--vc-bg-input);
+  border: 1px solid var(--vc-border); border-radius: var(--vc-radius-sm);
+  font-size: 0.875rem; color: var(--vc-text-secondary);
+}
