@@ -69,6 +69,14 @@ public class UserServiceImp implements UserService, UserDetailsService {
         return roleRepo.save(role);
     }
 
+    //GET SINGLE ROLE
+    @Override
+    public Role getRole(String roleName) {
+        log.info("Fetching role {}", roleName);
+        return roleRepo.findByName(roleName);
+    }
+
+
     //ADD ROLE TO USER
     @Override
     public void addRoleToUser(String username, String roleName) {
